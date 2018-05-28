@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="app-1">
+    <div v-bind:class="{ active: isActive, large: isLarge }">WHAT</div>
+    <div v-bind:class="classObject">WHATEVER</div>
+    <div v-bind:class="computedClassObject">COMPUTED</div>
+    <div v-bind:class="[activeClass, errorClass]">ARRAY</div>
+    <div v-bind:class="[isActive ? activeClass : '', errorClass]">CONDITIONAL</div>
+    <div v-bind:class="[{ active: isActive }, errorClass]">IS IT ACTIVE</div>
+  </div>
+
+
+  <!-- using Vue from script tags for practice-->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app-1',
+      data: {
+        isActive: true,
+        isLarge: true,
+        classObject: {
+          active: true,
+          large: true,
+        },
+        isThere: false,
+        error: true,
+        activeClass: 'active',
+        errorClass: 'error',
+      },
+      computed: {
+        computedClassObject: function () {
+          return {
+            active: this.isThere && !this.error,
+            error: this.error,
+          }
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
