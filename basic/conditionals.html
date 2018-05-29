@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="app-1">
+    <div v-if="ok">It's here</div>
+    <div v-else>No it isn't</div>
+    <div v-if="isIt">
+      <div>all these</div>
+      <div>all these</div>
+      <div>all these</div>
+    </div>
+    <div v-if="Math.random() > 0.5">do you see me</div>
+    <div v-else>or me</div>
+    <div v-if="girl == 'Paige'">yes please</div>
+    <div v-else-if="girl == 'Leila'">a couple more pleases</div>
+    <div v-else-if="girl == 'Fansen'">not complaining</div>
+    <div v-else>well whatever</div>
+  </div>
+
+  <!-- using Vue from script tags for practice-->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app-1',
+      data: {
+        ok: true,
+        isIt: false,
+        girl: 'Krisztike',
+      },
+
+    })
+  </script>
+</body>
+
+</html>
