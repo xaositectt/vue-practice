@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <ul id="example-1">
+    <li v-for="she in them">
+      {{ she.name }} - {{ she.age }} - {{ she.country }}
+    </li>
+    <li v-for="(property, key) in Paige">
+      {{ key }} - {{ property }}
+    </li>
+    <li v-for="number in evenNumbers">
+      <span>the number is: </span>
+      {{ number }}
+    </li>
+    <li v-for="number in even(numbers)">
+      {{ number }}
+    </li>
+    <div>
+      <span v-for="n in 10">{{ n }} </span>
+    </div>
+
+    <!-- for loop with if -->
+    <div v-for="she in them" v-if="she.cool">
+      <div> {{ she.name }} </div>
+    </div>
+  </ul>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let example1 = new Vue({
+      el: '#example-1',
+      data: {
+        them: [{
+            name: 'Paige',
+            age: 22,
+            country: 'US',
+            cool: true,
+          },
+          {
+            name: 'Leila',
+            age: 27,
+            country: 'DE',
+            cool: true,
+          },
+          {
+            name: 'Fansen',
+            age: 28,
+            country: 'CW',
+            cool: false,
+          }
+        ],
+        Paige: {
+          firstName: 'Paige',
+          lastName: 'Yness',
+          occupation: 'artist',
+        },
+        numbers: [1, 2, 3, 4, 5, 6, 7, 8]
+      },
+      methods: {
+        even: function (numbers) {
+          return numbers.filter(function (number) {
+            return number % 2 === 0;
+          });
+        }
+      },
+      computed: {
+        evenNumbers: function () {
+          return this.numbers.filter(function (number) {
+            return number % 2 == 0;
+          })
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
