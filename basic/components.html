@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <div v-for="girl in girls">
+      <div> {{ girl.name }} </div>
+    </div>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <segment name="Rachel"></segment>
+    <segment name="Monica"></segment>
+    <segment name="Phoebe"></segment>
+    <segment v-for="girl in girls2" v-bind:name="girl.name"></segment>
+
+    <div :style="{ fontSize: postFontSize + 'em'}">
+      <girl v-for="girl in girls2" v-bind:girlinfo="girl" v-on:enlarge-text="postFontSize += 0.1" v-on:enlarge-text2="postFontSize += $event"
+        v-on:enlarge-text3="onEnlargeText"></girl>
+    </div>
+
+    <alert-box>I wish you hadn't done that</alert-box>
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // Define a new component called button-counter
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+
+    Vue.component('segment', {
+      props: ['name'],
+      template: '<div>{{ name }}</div>'
+    })
+
+    Vue.component('girl', {
+      props: ['girlinfo'],
+      template: `
+      <div class="girl">
+        <button v-on:click="$emit('enlarge-text')">
+        Enlarge text
+        </button>
+        <button v-on:click="$emit('enlarge-text2', 0.1)">
+        Enlarge text
+        </button>
+        <button v-on:click="$emit('enlarge-text3', 0.1)">
+        Enlarge text
+        </button>
+        <div> {{ girlinfo.name }}</div>
+        <div> {{ girlinfo.age }}</div>
+        <div> {{ girlinfo.profession }}</div>
+      </div>
+      `
+    })
+
+    Vue.component('alert-box', {
+      template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+    `
+    })
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        girls: [{
+            name: 'Rachel'
+          },
+          {
+            name: 'Monica'
+          },
+          {
+            name: 'Phoebe'
+          },
+        ],
+        girls2: [{
+            name: 'Rachel',
+            age: 28,
+            profession: 'waitress',
+          },
+          {
+            name: 'Monica',
+            age: 29,
+            profession: 'bartender',
+          },
+          {
+            name: 'Phoebe',
+            age: 33,
+            profession: 'masseuse',
+          },
+        ],
+        postFontSize: 1,
+      },
+      methods: {
+        onEnlargeText: function (amount) {
+          this.postFontSize += amount;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

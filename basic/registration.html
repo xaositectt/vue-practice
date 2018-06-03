@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Component registration</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <div v-for="girl in girls">
+      <div> {{ girl.name }}</div>
+    </div>
+
+    <alert-box>error</alert-box>
+
+    <message-box>hello</message-box>
+  </div>
+
+  <div id="app2">
+    <alert-box>
+      <message-box>hello</message-box>
+    </alert-box>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    //globally registrated, means you can use it in any vue instance
+    //also works as alert-box
+    Vue.component('AlertBox', {
+      template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+    `
+    })
+
+    let MessageBox = {
+      template: `
+    <div class="message-box">
+      <strong><slot></slot></strong>
+    </div>
+    `
+    }
+
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        girls: [{
+            name: 'Paige'
+          },
+          {
+            name: 'Leila'
+          },
+          {
+            name: 'Lily'
+          },
+
+        ]
+      }
+    })
+
+    let app2 = new Vue({
+      el: '#app2',
+      components: {
+        'message-box': MessageBox,
+      }
+    })
+  </script>
+</body>
+
+</html>
