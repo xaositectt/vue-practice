@@ -1,14 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  
+
+  <!-- Even though `42` is static, we need v-bind to tell Vue that -->
+  <!-- this is a JavaScript expression rather than a string.       -->
+  <div id="app">
+    <blog-post title="Origin of species" v-bind:number="12" v-bind:circumstances="{species: 'finch', location: 'North- Galapagos'}"></blog-post>
+
+    <girl-post v-bind="{name: 'LeiLa', age: '28', nationality: 'German'}"></girl-post>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-  <script></script>
+  <script>
+    // Vue.component('blog-post', {
+    //   // camelCase in JavaScript
+    //   props: ['postTitle'],
+    //   template: '<h3>{{ postTitle }}</h3>'
+    // })
+
+    let BlogPost = {
+      props: {
+        title: {
+        type: String,
+        required: true,
+        },
+        number: Number,
+        circumstances: Object,
+      },
+      template: `
+      <div>
+        <h3>{{ number }} {{ title }}</h3>
+        <p>species: {{ circumstances.species }}</p>
+        <p>location: {{ circumstances.location }}</p>
+      </div>
+      `
+    }
+
+    let introduction = {
+      props: {
+        name: {
+        type: String,
+        required: true,
+        },
+      },
+      computed: {
+        getName: function() {
+          let name = this.name.toLowerCase()
+          return name.charAt(0).toUpperCase() + name.slice(1)
+        }
+      },
+      template: `
+      <div>
+        <p>{{ getName }}</p>
+      </div>
+      `
+    }
+
+    let sayHello = {
+      props: ['name'],
+      data:  function() {
+          return {
+            her: 'Leila'
+          }
+      }, 
+      template: '<div>Hello, it\'s {{her}} </div>'
+    }
+    
+    class Girl {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+    }
+
+
+    let anotherGirl = {
+      props: {
+        girl: {
+          type: Girl,
+          default: new Girl('Paige', 22)
+        }
+      },
+      template: '<div>Hi I am {{ girl.name }} and I am  {{ girl.age }}</div>'
+    }
+
+    let girlData = {
+      props: {
+        hername: {
+          type: String,
+          default: 'Paige',
+        },
+        data: {
+          type: Object,
+          default: function(){
+            return {
+              age: 23,
+              height: 165,
+              weight: 50,
+            }
+          },
+        },
+        strength: {
+          type: String,
+          validator: function(value) {
+            return ['beauty', 'persuasiveness', 'intelligence'].indexOf(value) !=  -1;
+          }
+        },
+      },
+      template: `
+      <div>
+        <div>Her name is: {{ hername }}.</div>
+        <div>She is {{ data.age }} old.</div>
+        <div>She is {{ data.height }} cms tall.</div>
+        <div>She is {{ data.weight }} kgs.</div>
+        <div>Her strength is her {{ strength }}.</div>
+      </div>
+      `
+    }
+
+    let GirlPost = {
+      props: {
+        name: String,
+        age: Number,
+        nationality: Object,
+      },
+      components: {
+        'introduction': introduction,
+        'say-hello': sayHello,
+        'girl-data': girlData,
+        'another-girl': anotherGirl,
+      },
+      template: `
+      <div>
+        <h3>{{ name }}</h3>
+        <p>age: {{ age }}</p>
+        <p>nationality: {{ nationality }}</p> 
+        <introduction v-bind:name="name"></introduction>
+        <say-hello v-bind:name="name"></say-hello>
+        <girl-data></girl-data>
+        <girl-data hername="Leila" v-bind:data="{age: 27, height: 176, weight: 60 }" strength="strength" ></girl-data>
+        <another-girl></another-girl>
+      </div>
+      `
+    }
+
+    let app = new Vue({
+      el: '#app',
+      components: {
+        'blog-post': BlogPost,
+        'girl-post': GirlPost,
+      },
+      data: {
+        darwin1: {
+          species: 'finches', 
+          location: 'Galapagos',
+        }
+      }
+    })
+  </script>
 </body>
+
 </html>
