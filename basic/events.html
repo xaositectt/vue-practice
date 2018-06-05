@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <test-comp></test-comp>
+    <div v-for="girl in girls">{{ girl.name }}</div>
+    <button @click="counter++">push me</button>
+    <div>{{ counter }}</div>
+    <counter-button :my-counter="20"></counter-button>
+    <basic-checkbox  v-model="lovingVue"></basic-checkbox>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const testComp = {
+      props: {
+        data: {
+          type: Object,
+          default: function () {
+            return {
+              name: 'Robin',
+              age: 27,
+              occ: 'anchor',
+            }
+          },
+        }
+      },
+      template: `
+      <div>
+        <div>{{ data.name }}</div>
+        <div>{{ data.age }}</div>
+        <div>{{ data.occ }}</div>
+      </div>
+      `
+    }
+
+    const counterButton = {
+      props: {
+        myCounter: Number,
+      },
+      data: function () {
+        return {
+          count: this.myCounter,
+        }
+      },
+      template: `
+      <div>
+        <button @click="count++">push me</button>
+        <div> {{ count }} </div>
+      </div>
+      `
+    }
+
+    const basicCheckbox = {
+      model: {
+        prop: 'checked',
+        event: 'change',
+      },
+      props: {
+        checked: Boolean,
+      },
+      template: `
+      <div>
+        <input 
+        type="checkbox" 
+        :checked="false"
+        @change:emit="$emit('change', $event.target.checked)">
+        <div>{{ checked }}</div>
+      </div>
+      `
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        girls: [{
+            name: 'Paige',
+            age: 22
+          },
+          {
+            name: 'Leila',
+            age: 27
+          },
+          {
+            name: 'Sarah',
+            age: 25
+          },
+        ],
+        counter: 0,
+        lovingVue: true,
+      },
+      components: {
+        'test-comp': testComp,
+        'counter-button': counterButton,
+        'basic-checkbox': basicCheckbox,
+      },
+    })
+  </script>
+</body>
+
+</html>
