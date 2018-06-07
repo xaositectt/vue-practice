@@ -1,0 +1,130 @@
+<!DOCTYPE hml>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    <test></test>
+    <div v-for="elem in list">{{ elem }}</div>
+    <slot-test>WHAT</slot-test>
+    <slot-test><img src="http://img2-ak.lst.fm/i/u/64s/f158a920ae7d65f95c4ac239ccd061da"></slot-test>
+    <slot-test>
+      <test></test>
+    </slot-test>
+    <layout>
+      <template slot="header">hello</template>
+      <p>WHAAAAAAT</p>
+      <template slot="footer">hello</template>
+    </layout>
+
+    <layout>
+      <h1 slot="header">
+        HELLO THIS IS HEADER
+      </h1>
+      <p>the ass was fat</p>
+      <p slot="footer">DO NOT WANT</p>
+    </layout>
+
+    <slot-def>WAHHAH
+    </slot-def>
+
+    <girl-list :girls="girls">
+      <template slot-scope="{ girl }">
+        <span v-if="girl.available">✓</span>
+        {{ girl.name }}
+      </template>
+    </girl-list>
+  </div>
+
+
+  
+  <script>
+
+  const test = {
+    template: '<div>hello world</div>'
+  }
+
+  const slotTest = {
+    template: `
+    <a href="http://google.com">
+      <slot></slot>
+    </a>
+    `
+  }
+
+  const layout = {
+    template:  `
+    <div>
+      <header>
+        <slot name="header"></slot>
+      </header>
+      <article>
+        <slot></slot>
+      </article>
+      
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+    `  
+  }
+
+  const slotDefault = {
+    template: `
+    <div>
+       <button>
+        <slot>Submit</slot>
+       </button>
+    </div>
+    `
+  } 
+
+  const girlList = {
+    props: {
+      girls: {
+        type: Array,
+        required: true,
+      } 
+    },
+    template: `
+    <div>
+      <div v-for="girl in girls" :key="girl.name">     
+        <slot v-bind:girl="girl">
+          {{ girl.name }}
+        </slot>
+      </div>
+    </div>
+    `
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      list: [1, 2, 3, 4],
+      girls: [
+        {name: 'Rachel', age: '27', occ: 'waitress', available: false},
+        {name: 'Monica', age: '27', occ: 'barista', available: false},
+        {name: 'Phoebe', age: '29', occ: 'masseuse', available: true},
+        {name: 'Ursula', age: '29', occ: 'waitress', available: true},
+        {name: 'Jill', age: '22', occ: 'spoiled brat', available: true},
+      ]
+    },
+    components: {
+      'test': test,
+      'slot-test': slotTest,
+      'layout': layout,
+      'slot-def': slotDefault,
+      'girl-list': girlList,
+    }
+  })
+  </script>
+</body>
+
+</html>

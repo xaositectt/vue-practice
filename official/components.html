@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <div id="app">
     <div v-for="girl in girls">
       <div> {{ girl.name }} </div>
@@ -29,6 +28,13 @@
     </div>
 
     <alert-box>I wish you hadn't done that</alert-box>
+
+    <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]" v-on:click="currentTab = tab">{{ tab }}</button>
+
+    <component v-bind:is="currentTabComponent" class="tab">
+
+
+    </component>
 
   </div>
 
@@ -79,7 +85,19 @@
     `
     })
 
-    let vm = new Vue({
+    Vue.component('tab-home', {
+      template: '<div>Home component</div>'
+    })
+
+    Vue.component('tab-posts', {
+      template: '<div>Posts component</div>'
+    })
+
+    Vue.component('tab-archive', {
+      template: '<div>Archive component</div>'
+    })
+
+    const vm = new Vue({
       el: '#app',
       data: {
         girls: [{
@@ -109,12 +127,19 @@
           },
         ],
         postFontSize: 1,
+        currentTab: 'Home',
+        tabs: ['home', 'posts', 'archive'],
       },
       methods: {
         onEnlargeText: function (amount) {
           this.postFontSize += amount;
         }
-      }
+      },
+      computed: {
+        currentTabComponent: function () {
+          return 'tab-' + this.currentTab.toLowerCase()
+        }
+      },
     })
   </script>
 </body>
