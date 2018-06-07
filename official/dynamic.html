@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./styledin.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', { active: currentTab === tab }]" v-on:click="currentTab = tab">{{ tab }}</button>
+
+    <keep-alive>
+      <component v-bind:is="currentTabComponent" class="tab"></component>
+    </keep-alive>
+
+  </div>
+
+  <script>
+    Vue.component(
+      'tab-posts', {
+        data: function () {
+          return {
+            posts: [{
+                id: 1,
+                title: 'Baldur\'s gate',
+                content: '<p>The lord of murder shall perisn</p>'
+              },
+              {
+                id: 2,
+                title: 'Torment',
+                content: '<p>What can change the nature of a man?</p>'
+              },
+              {
+                id: 3,
+                title: 'Fallout',
+                content: '<p>War. War never changes.</p>'
+              }
+            ],
+            selectedPost: null
+          }
+        },
+        template: `
+      <div class="posts-tab">
+      <ul class="posts-sidebar">
+        <li
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:class="{ selected: post === selectedPost }"
+					v-on:click="selectedPost = post"
+        >
+          {{ post.title }}
+        </li>
+      </ul>
+      <div class="selected-post-container">
+      	<div 
+        	v-if="selectedPost"
+          class="selected-post"
+        >
+          <h3>{{ selectedPost.title }}</h3>
+          <div v-html="selectedPost.content"></div>
+        </div>
+        <strong v-else>
+          Click on a blog title to the left to view it.
+        </strong>
+      </div>
+    </div>
+      `
+      }
+    )
+
+    Vue.component(
+      'tab-archive', {
+        template: '<div>Archive component</div>'
+      }
+    )
+ 
+    //only works with globally registered components!
+    const app = new Vue({
+      el: '#app',
+      data: {
+        currentTab: 'Posts',
+        tabs: ['Posts', 'Archive']
+      },
+      computed: {
+        currentTabComponent: function () {
+          return 'tab-' + this.currentTab.toLowerCase()
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
