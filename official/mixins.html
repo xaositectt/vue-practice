@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+  
+
+  <script>
+    // inject a handler for `myOption` custom option
+    //global mixin
+    Vue.mixin({
+      created: function () {
+        var myOption = this.$options.myOption
+        if (myOption) {
+          console.log(myOption)
+        }
+      }
+    })
+
+    var myMixin = {
+      created: function () {
+        this.hello()
+      },
+      methods: {
+        hello: function () {
+          console.log('hello from mixin!')
+        }
+      }
+    }
+
+    var Component = Vue.extend({
+      mixins: [myMixin]
+    })
+
+    var component = new Component()
+
+    var mixin = {
+      data: function () {
+        return {
+          message: 'hello',
+          foo: 'abc'
+        }
+      },
+      created: function () {
+        console.log('mixin hook called')
+      }
+    }
+
+    new Vue({
+      mixins: [mixin],
+      myOption: 'hey Paige',
+      data: function () {
+        return {
+          message: 'goodbye',
+          bar: 'def'
+        }
+      },
+      created: function () {
+        console.log(this.$data)
+        // => { message: "goodbye", foo: "abc", bar: "def" }
+      },
+    })
+
+
+
+
+
+  </script>
+</body>
+</html>
