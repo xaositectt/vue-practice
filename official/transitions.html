@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!--
+  Velocity works very much like jQuery.animate and is
+  a great option for JavaScript animations
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <link rel="stylesheet" href="./transitions.css">
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <button @click="show = !show">switch</button>
+    
+    <transition name="fade" appear>
+      <div v-if="show">show me the money</div>
+    </transition>
+    
+    <transition name="slide-fade">
+      <p v-if="show">glittering prizes</p>
+    </transition>
+    
+  </div>
+  
+  <div id="app2">
+      <button @click="show = !show">switch</button>
+      <transition name="bounce" appear>
+        <p v-if="show">there is no cow level</p>
+      </transition>
+    
+  </div>
+
+  <div id="app3">
+    <button @click="show = !show">switch</button>
+    <transition 
+    name="custom-classes-transition"
+    enter-active-class="animated tada"
+    leave-active-class="animated bounceOutRight"
+    appear
+    >
+      <p v-if="show">black sheep wall</p>
+    </transition>
+    
+  </div>
+
+  <div id="app4">
+    <button @click="show = !show">
+      Toggle
+    </button>
+    <transition
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:leave="leave"
+      v-bind:css="false"
+    >
+      <p v-if="show">
+        Demo
+      </p>
+    </transition>
+  </div> 
+
+  <br>
+  <div id="app5">
+    <button @click="isEditing = !isEditing">toggle</button>
+    <transition>
+      <button v-if="isEditing" key="save">
+        Save
+      </button>
+      <button v-else key="edit">
+        Edit
+      </button>
+    </transition>
+
+    <transition name="fade" mode="out-in">
+      <button v-bind:key="isEditing">
+        {{ isEditing ? 'Save' : 'Edit' }}
+      </button>
+    </transition>
+  </div>
+
+  <div id="app6">
+    <br>
+    <button @click="increment">toggle</button>
+    <div>{{ num }}</div>
+    <transition name="fade" mode="out-in">
+      <button v-bind:key="returnGirl">
+        {{ message }}
+      </button>
+    </transition>
+  </div>
+
+  <br>
+  <div id="app7">1
+    <label for="A">A</label>
+    <input type="radio" @click="view = 'v-a'" name="A">
+    <label for="B">B</label>
+    <input type="radio" @click="view = 'v-b'" name="B">
+    <transition name="component-fade" mode="out-in">
+      <component v-bind:is="view"></component>
+    </transition>
+  </div>
+
+  <div id="app8">
+    <div id="list-demo">
+      <button v-on:click="add">Add</button>
+      <button v-on:click="remove">Remove</button>
+      <transition-group name="list" tag="p">
+        <span v-for="item in items" v-bind:key="item" class="list-item">
+          {{ item }}
+        </span>
+      </transition-group>
+    </div>
+
+    <br>
+
+  </div>
+
+  <div id="flip-list-demo" class="demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <transition-group name="flip-list" tag="ul">
+      <li v-for="item in items" v-bind:key="item">
+        {{ item }}
+      </li>
+    </transition-group>
+  </div>
+
+  <div id="list-complete-demo" class="demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <button v-on:click="add">Add</button>
+    <button v-on:click="remove">Remove</button>
+    <transition-group name="list-complete" tag="p">
+      <span
+        v-for="item in items"
+        v-bind:key="item"
+        class="list-complete-item"
+      >
+        {{ item }}
+      </span>
+    </transition-group>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        show: true,
+      }
+    })
+
+    const app2 = new Vue({
+      el: '#app2',
+      data: {
+        show: true,
+      }
+    })
+
+    const app3 = new Vue({
+      el: '#app3',
+      data: {
+        show: true,
+      }
+    })
+
+    const app4 = new Vue({
+      el: '#app4',
+      data: {
+        show: false
+      },
+      methods: {
+        beforeEnter: function (el) {
+          el.style.opacity = 0
+        },
+        enter: function (el, done) {
+          Velocity(el, { opacity: 1, fontSize: '2em' }, { duration: 500 })
+          Velocity(el, { fontSize: '1em' }, { complete: done })
+        },
+        leave: function (el, done) {
+         
+          Velocity(el, {
+            rotateZ: '5deg',
+            translateY: '30px',
+            translateX: '30px',
+            opacity: 0
+          }, { complete: done })
+        }
+      }
+    })
+
+     const app5 = new Vue({
+      el: '#app5',
+      data: {
+        isEditing: true,
+        num: 0, 
+        index: 0,
+        states: ['saved', 'edited', 'editing'],
+     
+      },    
+    })
+
+     const app6 = new Vue({
+      el: '#app6',
+      data: {
+        num: 0, 
+        girls: ['Paige', 'Leila', 'Treegirl']
+      },
+      methods: {
+        increment: function () {
+          this.num += 1
+        },
+      },
+      computed: {
+        returnGirl: function () {
+        
+          let index = this.num % 3
+          return this.girls[index]
+        },
+        message: function () {
+          switch (this.returnGirl) {
+            case 'Paige': return 'whole package'
+            case 'Leila': return 'personalities and hair'
+            case 'Treegirl': return 'smile'
+          }
+        }
+      }     
+    })
+
+    const app7 = new Vue({
+      el: '#app7',
+      data: {
+        view: 'v-a'
+      },
+      components: {
+        'v-a': {
+          template: '<div>Component A</div>'
+        },
+        'v-b': {
+          template: '<div>Component B</div>'
+        }
+      }
+    })
+
+    const app8 = new Vue({
+      el: '#list-demo',
+      data: {
+        items: [1,2,3,4,5,6,7,8,9],
+        nextNum: 10,
+      },
+      methods: {
+        add: function () {
+          this.items.push(this.nextNum)
+          this.nextNum++
+        },
+        remove: function () {
+          this.items.pop()
+        }
+      }
+    })
+
+    const app9 = new Vue({
+      el: '#flip-list-demo',
+      data: {
+        items: [1,2,3,4,5,6,7,8,9]
+      },
+      methods: {
+        shuffle: function () {
+          this.items = _.shuffle(this.items)
+        }
+      }
+    })
+
+    const app10 = new Vue({
+      el: '#list-complete-demo',
+      data: {
+        items: [1,2,3,4,5,6,7,8,9],
+        nextNum: 10
+      },
+      methods: {
+        add: function () {
+          if (this.items.length > 0) {
+          let next = this.items.slice(-1)[0] + 1
+          this.items.push(next)
+          } else {
+            this.items.push(1)
+          }
+        },
+        remove: function () {
+          this.items.pop()
+        },
+        shuffle: function () {
+          this.items = _.shuffle(this.items)
+        }
+      }
+      })
+  </script>
+</body>
+
+</html>
