@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+
+  <div id="app1">
+    <anchored-heading level="2">what</anchored-heading>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur orci felis, 
+      sit amet malesuada sapien tristique in. Quisque justo libero, sagittis nec mauris eu, 
+      tincidunt condimentum lacus. Vivamus vulputate rhoncus arcu ac placerat. Nulla egestas 
+      posuere felis id dictum. In quis fringilla tortor, sit amet scelerisque tortor. Curabitur 
+      erat arcu, accumsan sed rhoncus quis, fermentum porta ante. Vivamus rutrum elit sit amet 
+      metus bibendum tempus. Quisque aliquam placerat massa, ac fringilla risus auctor et. Quisque 
+      dui enim, luctus quis leo vitae, euismod facilisis lacus. Nam sagittis, tellus id tincidunt 
+      tincidunt, sapien augue commodo nisl, ac laoreet nisi leo at nisl. Curabitur sed porttitor nisl, 
+      non dapibus erat. Quisque facilisis ut massa sed cursus. Nam sem elit, mattis nec justo sed, 
+      feugiat vehicula metus. Donec ac ultricies diam, nec gravida nunc.
+    </p>
+    <anchored-heading level="1">the</anchored-heading>
+    <p>
+      Quisque ultrices risus et nibh imperdiet ultrices. Curabitur vulputate nisl risus, eget
+      luctus est tempor et. Donec accumsan varius mauris. Duis vitae porttitor enim. Integer 
+      sagittis dui quis leo elementum egestas ut efficitur tortor. Morbi fringilla ultricies
+      elementum. Etiam erat metus, viverra non luctus quis, volutpat a est. Aenean sodales 
+      est sit amet dictum sagittis.
+    </p>
+    <anchored-heading level="1">funk</anchored-heading>
+    <p>
+        Quisque ultrices risus et nibh imperdiet ultrices. Curabitur vulputate nisl risus, eget
+        luctus est tempor et. Donec accumsan varius mauris. Duis vitae porttitor enim. Integer 
+        sagittis dui quis leo elementum egestas ut efficitur tortor. Morbi fringilla ultricies
+        elementum. Etiam erat metus, viverra non luctus quis, volutpat a est. Aenean sodales 
+        est sit amet dictum sagittis.
+      </p>
+    <anchored-heading level="3">is</anchored-heading>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur orci felis, 
+        sit amet malesuada sapien tristique in. Quisque justo libero, sagittis nec mauris eu, 
+        tincidunt condimentum lacus. Vivamus vulputate rhoncus arcu ac placerat. Nulla egestas 
+        posuere felis id dictum. In quis fringilla tortor, sit amet scelerisque tortor. Curabitur 
+        erat arcu, accumsan sed rhoncus quis, fermentum porta ante. Vivamus rutrum elit sit amet 
+        metus bibendum tempus. Quisque aliquam placerat massa, ac fringilla risus auctor et. Quisque 
+        dui enim, luctus quis leo vitae, euismod facilisis lacus. Nam sagittis, tellus id tincidunt 
+        tincidunt, sapien augue commodo nisl, ac laoreet nisi leo at nisl. Curabitur sed porttitor nisl, 
+        non dapibus erat. Quisque facilisis ut massa sed cursus. Nam sem elit, mattis nec justo sed, 
+        feugiat vehicula metus. Donec ac ultricies diam, nec gravida nunc.
+      </p>
+    <anchored-heading level="1">going</anchored-heading>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur orci felis, 
+        sit amet malesuada sapien tristique in. Quisque justo libero, sagittis nec mauris eu, 
+        tincidunt condimentum lacus. Vivamus vulputate rhoncus arcu ac placerat. Nulla egestas 
+        posuere felis id dictum. In quis fringilla tortor, sit amet scelerisque tortor. Curabitur 
+        erat arcu, accumsan sed rhoncus quis, fermentum porta ante. Vivamus rutrum elit sit amet 
+        metus bibendum tempus. Quisque aliquam placerat massa, ac fringilla risus auctor et. Quisque 
+        dui enim, luctus quis leo vitae, euismod facilisis lacus. Nam sagittis, tellus id tincidunt 
+        tincidunt, sapien augue commodo nisl, ac laoreet nisi leo at nisl. Curabitur sed porttitor nisl, 
+        non dapibus erat. Quisque facilisis ut massa sed cursus. Nam sem elit, mattis nec justo sed, 
+        feugiat vehicula metus. Donec ac ultricies diam, nec gravida nunc.
+      </p>
+    <anchored-heading level="2">on</anchored-heading>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur orci felis, 
+        sit amet malesuada sapien tristique in. Quisque justo libero, sagittis nec mauris eu, 
+        tincidunt condimentum lacus. Vivamus vulputate rhoncus arcu ac placerat. Nulla egestas 
+        posuere felis id dictum. In quis fringilla tortor, sit amet scelerisque tortor. Curabitur 
+        erat arcu, accumsan sed rhoncus quis, fermentum porta ante. Vivamus rutrum elit sit amet 
+        metus bibendum tempus. Quisque aliquam placerat massa, ac fringilla risus auctor et. Quisque 
+        dui enim, luctus quis leo vitae, euismod facilisis lacus. Nam sagittis, tellus id tincidunt 
+        tincidunt, sapien augue commodo nisl, ac laoreet nisi leo at nisl. Curabitur sed porttitor nisl, 
+        non dapibus erat. Quisque facilisis ut massa sed cursus. Nam sem elit, mattis nec justo sed, 
+        feugiat vehicula metus. Donec ac ultricies diam, nec gravida nunc.
+      </p>
+  </div>
+  
+  <script>
+
+    Vue.component('anchored-heading1', {
+      render: function (createElement) {
+        return createElement(
+          'h' + this.level,   // tag name
+          this.$slots.default // array of children
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    })
+
+    var getChildrenTextContent = function (children) {
+      return children.map(function (node) {
+        return node.children
+          ? getChildrenTextContent(node.children)
+          : node.text
+      }).join('')
+    }
+
+    Vue.component('anchored-heading', {
+      render: function (createElement) {
+        // create kebabCase id
+        var headingId = getChildrenTextContent(this.$slots.default)
+          .toLowerCase()
+          .replace(/\W+/g, '-')
+          .replace(/(^\-|\-$)/g, '')
+
+        return createElement(
+          'h' + this.level,
+          [
+            createElement('a', {
+              attrs: {
+                name: headingId,
+                href: '#' + headingId
+              }
+            }, this.$slots.default)
+          ]
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    })
+
+    const app1 = new Vue({
+      el: '#app1',
+    })
+  
+  </script>
+</body>
+</html>
