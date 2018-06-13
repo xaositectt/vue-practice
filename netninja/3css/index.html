@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueJS</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script></script>
+</head>
+<body>
+  
+  <div id="app1">
+   <h1>dynamic css</h1>
+    <div @click="available= !available" v-bind:class="{available: available, nearby: nearby}">what</div>
+    <h1>dynamic css again</h1>
+    <button  @click="nearby = !nearby">toggle nearby</button>
+    <button @click="available = !available">toggle available</button>
+    <div v-bind:class="compClasses">wat</div>
+    <div v-bind:class="compClasses">nearby</div>
+
+    <h1>conditionals</h1>
+    <button @click="error = !error">toggle error</button>
+    <button @click="success = !success">toggle success</button>
+    <div style="width: 200px; height: 100px;">
+      <p v-if="error">you have an error</p>
+      <p v-else-if="success">you have been successful</p>
+    </div>
+    <div style="width: 200px; height: 50px; background-color: yellow;">
+      <p v-show="error">you have an error</p>
+      <p v-show="success">you have been successful</p>
+    </div>
+
+    <h1>looping</h1>
+    <div v-for="guy in guys">{{ guy }}</div>
+    <template v-for="(girl, index) in girls">
+      <h3>
+        {{index}}. - {{ girl.name }}
+      </h3>
+      <p>occupation: {{ girl.occ }}</p>
+      <p>age: {{ girl.age }}</p>
+    </template>
+
+    <template v-for="girl in girls">
+      <h3>{{ girl.name }}</h3>
+      <div v-for="(val, key) in girl">
+        <p> {{ key }} - {{ val }} </p>
+      </div>
+    </template>
+  </div>
+ 
+
+  <script src="./app.js"></script>
+</body>
+</html>

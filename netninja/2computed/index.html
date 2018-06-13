@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueJS</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script></script>
+</head>
+<body>
+  
+  <div id="app1">
+    <div>
+      two-way data binding
+      <br>
+      <label for="name">name</label>
+      <span>{{ name }}</span>
+      <br>
+      <input @keyup.enter="logName" v-model="name" name="name" type="text">
+      <br>
+      <label for="age">age</label>
+      <span>{{ age }}</span>
+      <br>
+      <input @keyup.enter.alt="logAge" v-model="age" name="age" type="text">
+      <p>computed properties</p>
+      <button @click="a++">add to a</button>
+      <br>
+      <button @click="b++">add to b</button>
+      <p>A = {{ a }}</p>
+      <p>B = {{ b }}</p>
+      <p>Age + A = {{ addToA }}</p>
+      <p>Age + B = {{ addToB }}</p>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
