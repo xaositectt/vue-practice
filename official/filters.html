@@ -21,9 +21,13 @@
   <script>
 
     Vue.filter('decapitalize', function (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toLowerCase() + value.slice(1)
+      let returnValue
+      if (!value) {
+        returnValue = ''
+      } else {
+        returnValue = value.toString().charAt(0).toLowerCase() + value.slice(1)
+      }
+      return returnValue
     })
 
     const app = new Vue({

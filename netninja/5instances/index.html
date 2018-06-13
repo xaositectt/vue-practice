@@ -11,12 +11,7 @@
 </head>
 <body>
   
-  <div id="app1">
-    <h3>
-      {{ title }}
-    </h3>
-    <p>{{ greet() }}</p>
-  </div>
+
   <div id="app2">
     <h3>
       {{ title }}
@@ -31,6 +26,10 @@
     </h3>
     <p>{{ greet() }}</p>
     <greeting></greeting>
+    <h2>Refs</h2>
+    <input type="text" ref="input">
+    <button @click="readRefs">submit</button>
+    <p>Your fav.food: {{ output }}</p>
   </div>
  
 

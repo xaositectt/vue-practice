@@ -15,21 +15,6 @@ Vue.component('greeting', {
   }
 })
 
-const app1 = new Vue({
-  el: '#app1',
-  data: {
-    title: 'app one',
-  },
-  methods: {
-    greet: function() {
-      return `hello from ${this.title}`
-    },
-  },
-  computed: {
-  
-  }
-})
-
 const app2 = new Vue({
   el: '#app2',
   data: {
@@ -52,11 +37,16 @@ const app3 = new Vue({
   el: '#app3',
   data: {
     title: 'app three',
+    output: 'Your fav girl'
   },
   methods: {
     greet: function() {
       return `hello from ${this.title}`
     },
+    readRefs: function() {
+      console.log(this.$refs.input.value)
+      this.output = this.$refs.input.value
+    }
   },
   computed: {
   
