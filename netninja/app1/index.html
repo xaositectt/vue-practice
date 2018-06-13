@@ -15,7 +15,36 @@
     <p>{{ message() }}</p>
     <p>{{ message2 }}</p>
     <p>{{ greet('Paige') }}</p>
-    <a v-bind:href="link">hello</a>
+    <a :href="link">hello</a>
+    <input :value="'Paige'" />
+    <p v-html="linkString"></p>
+    <div>
+      <button @click="age += 1">add a year</button>
+      <button @click= "age -= 1">subtract a year</button>
+      <button @dblclick="add(10)">add 10 years</button>
+      <button @dblclick= "subtract(10)">subtract 10 years</button>
+    </div>
+    <div id="modifiers">
+      <p>modified events</p>
+      <button @click.once="age += 1">add a year</button>
+      <button @click= "age -= 1">subtract a year</button>
+      <button @dblclick="add(10)">add 10 years</button>
+      <button @dblclick= "subtract(10)">subtract 10 years</button>
+    </div>
+    with prevented default behavior
+    <a @click.prevent="click" href="http://google.com">alert</a>
+    <p>Paige's age is {{ age }}</p>
+    <div>
+      keyboard events
+      <label for="name">name</label>
+      <input @keyup.enter="logName" name="name" type="text">
+      <br>
+      <label for="age">age</label>
+      <input @keyup.enter.alt="logAge" name="age" type="text">
+    </div>
+    <div @mousemove="updateXY" id="canvas" style="width: 200px; padding:100px; background-color: lightblue; text-align: center;">
+      {{ xcoord }}, {{ ycoord }}
+    </div>
   </div>
 
   <script src="./app.js"></script>
