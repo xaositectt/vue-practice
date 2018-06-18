@@ -7,8 +7,13 @@ import Routes from './routes'
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
+//mode changes the url and behaviour of routing
+//default behavior is hash that points to a new 
+//part of this same document
+//history: you get the index.html back from the server
 const router = new VueRouter({
-  routes: Routes
+  routes: Routes,
+  mode: 'history'
 })
 
 //custom directives
