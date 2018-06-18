@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <show-blogs></show-blogs>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import addBlog from './components/addblog'
 import showBlogs from './components/showblogs'
+import listBlogs from './components/listblogs'
 
 export default {
   components: {
     'add-blog': addBlog,
     'show-blogs': showBlogs,
+    'list-blogs': listBlogs,
   },
   data () {
     return {
